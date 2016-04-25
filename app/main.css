@@ -1,0 +1,40 @@
+#stage {
+  margin: 0 auto;
+  width: 520px; }
+
+.cell {
+  background-color: #000;
+  border: 1px solid green;
+  width: 50px;
+  height: 50px;
+  float: left;
+  color: #fff;
+  line-height: 50px;
+  font-size: 25px;
+  text-align: center; }
+
+.hero {
+  background-color: green;
+  border-color: #fff; }
+
+.hero.big {
+  background-color: #00DA00; }
+
+.robot {
+  background-color: red;
+  border-color: #fff; }
+
+.powerUp {
+  background-color: blue;
+  border-color: #fff; }
+
+.obstacle {
+  background: url(../img/o.jpg) no-repeat;
+  background-size: cover;
+  border: none; }
+
+.msg {
+  height: 150px;
+  border: 1px solid #000;
+  overflow-y: scroll;
+  margin-bottom: 10px; }
