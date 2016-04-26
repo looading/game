@@ -24,9 +24,8 @@ hero.set = function(id) {
 // render hero
 hero.render = function (){
 	$('#' + hero.data.oldPos).removeClass('hero').empty()
-	if(attr.level == 0) {
-		$('.big').removeClass('big')
-	} else {
+	$('.big').removeClass('big')
+	if(attr.level != 0) {
 		$('#' + hero.data.pos).addClass('big')
 	}
 	
@@ -88,6 +87,7 @@ hero.moveTo = function(action) {
 	} else {
 		alert('你不能这样移动！回合结束！')
 	}
+	console.info('hero', hero.data);
 	hero.render()
 }
 

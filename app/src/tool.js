@@ -5,7 +5,7 @@ tool.createMsg = function(role, msg, className) {
 		<p class="${className}">${role} : ${msg}</p>
 	`;
 	$('.msg').append(html)
-	$('.msg').scrollTop($('.msg').height())
+	$('.msg').scrollTop($('.msg')[0].scrollHeight - $('.msg').height())
 }
 
 

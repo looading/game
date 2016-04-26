@@ -26,6 +26,7 @@ robot.render = function() {
 	for(var item in robot.data) {
 		$("#" + item).addClass('robot').html('R')
 	}
+	console.info(robot.data);
 	
 }
 
@@ -41,7 +42,7 @@ robot.moveTo = function() {
 			free : [],
 			hero : []
 		}
-		var posArr = getId(pos[1], pos[2])
+		var posArr = getIdList(pos[1], pos[2])
 		for(var i=0; i<posArr.length; i++) {
 			var obj = $("#"+posArr[i])
 			if(obj.attr('class')) {
@@ -57,6 +58,7 @@ robot.moveTo = function() {
 			}
 		}
 
+		// 若附近有hero，则优先hero
 		if(tmp.hero.length!=0) {
 
 			if(attr.level != 0) {
@@ -68,31 +70,42 @@ robot.moveTo = function() {
 				tool.creatMsge('System','hero is killed! score:' + attr.score, 'text-danger')
 			}
 
+			robot.render()
 			continue;
 		}
 
+		// 若附近没有hero但是有 power-up 则优先摧毁power-up
 		if(tmp.power.length!=0) {
-			power.delete(tmp.power[0])
+			
 
 			var index = Math.floor(Math.random()*(tmp.power.length))
+			power.delete(tmp.power[0])
 			delete robot.data[item]
 			robot.data[tmp.power[index]] = item
 			tool.createMsg('System', 'a robot destory a power-up', 'text-info')
+
+			robot.render()
 			continue;
 		}
 
+		// 若周围没有hero也没有power-up  则向靠近hero的方向走
 		if(tmp.free.length!=0) {
-			var index = Math.floor(Math.random()*(tmp.free.length))
+			
+			var pos = getIdByDistance(tmp.free)
+
 			delete robot.data[item]
-			robot.data[tmp.free[index]] = item
+			robot.data[pos] = item
 			tool.createMsg('System','a robot has moved', 'text-info')
+
+			robot.render()
 			continue;
 		}
+
 
 		continue;
 
 	}
-	robot.render()
+	
 }
 
 // 删除robot
@@ -102,7 +115,7 @@ robot.delete = function(id) {
 }
 
 
-function getId(x, y) {
+function getIdList(x, y) {
 	var tox = toy = 0
 	var posArr = []
 	for (var i=0; i<3; i++) {
@@ -114,8 +127,49 @@ function getId(x, y) {
 			posArr.push("cell_" + tmp_x + "_" + tmp_y)
 		}
 	}
-	console.log(posArr, '-----');
+	// console.log(posArr, '-----');
 	return posArr
+}
+
+// 返回 距离hero 距离最短的坐标
+function getIdByDistance(ids) {
+	
+	var hero = {
+		x : $('.hero').attr('id').split('_')[1],
+		y : $('.hero').attr('id').split('_')[2]
+	}
+
+	var min = ids[0];
+
+	for (var i = 1; i < ids.length; i++) {
+		var pre = {
+				x : ids[i-1].split('_')[1],
+				y : ids[i-1].split('_')[2]
+			},
+			now = {
+				x : ids[i].split('_')[1],
+				y : ids[i].split('_')[2]
+			}
+
+		// pre <= now ? true:false
+		if(compare(pre, now, hero)) {
+			min = ids[i-1]
+		} else {
+			min = ids[i]
+		}
+	}
+	console.warn('robot', min, 'hero', hero);
+	return min
+
+}
+
+function compare(p, n, hero) {
+	console.info(hero);
+	var pd = Math.pow(Math.abs(p.x-hero.x),2) + Math.pow(Math.abs(p.y-hero.y), 2)
+	var nd = Math.pow(Math.abs(n.x-hero.x),2) + Math.pow(Math.abs(n.y-hero.y), 2)
+
+	console.log('robot,hero', pd, p, nd, n);
+	return pd <= nd ? true:false;
 }
 
 module.exports = robot
