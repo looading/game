@@ -32,7 +32,7 @@ robot.render = function() {
 
 // 移动
 robot.moveTo = function() {
-	
+
 
 	for(var item in robot.data) {
 		var pos = item.split('_')
@@ -69,7 +69,7 @@ robot.moveTo = function() {
 				alert('failed!')
 				tool.creatMsge('System','hero is killed! score:' + attr.score, 'text-danger')
 			}
-
+			config.moveAble = true
 			robot.render()
 			continue;
 		}
@@ -83,7 +83,7 @@ robot.moveTo = function() {
 			delete robot.data[item]
 			robot.data[tmp.power[index]] = item
 			tool.createMsg('System', 'a robot destory a power-up', 'text-info')
-
+			config.moveAble = true
 			robot.render()
 			continue;
 		}
@@ -97,11 +97,12 @@ robot.moveTo = function() {
 			robot.data[pos] = item
 			tool.createMsg('System','a robot has moved', 'text-info')
 
+			config.moveAble = true
 			robot.render()
 			continue;
 		}
 
-
+		config.moveAble = false
 		continue;
 
 	}

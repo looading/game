@@ -19,11 +19,19 @@ event.create = function() {
 				$(window).off('keypress')
 				alert('you win!\nscore:' + attr.score)
 
-			} else if(Object.keys(power.data) == 0 && attr.level == 0 || Object.keys(hero.data) == 0) {
+			} else if(Object.keys(power.data).length == 0 && attr.level == 0 || Object.keys(hero.data) == 0) {
+				
+				if(attr.level == 0 && !config.moveAble) {
+					$(window).off('keypress')
+					alert('平局')
+					return;
+				}
 				tool.createMsg('System','hero is killed, failed! score:' + attr.score, 'text-danger')
 				$(window).off('keypress')
 				alert('failed!')
-			}
+
+
+			} 
 			attr.change('round', 1)
 		}
 	})
