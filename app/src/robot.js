@@ -67,6 +67,7 @@ robot.moveTo = function() {
 				tool.createMsg('System','hero kill a robot,win 100 score', 'text-info')
 			} else {
 				alert('failed!')
+				$(window).off('keypress')
 				tool.creatMsge('System','hero is killed! score:' + attr.score, 'text-danger')
 			}
 			config.moveAble = true
@@ -153,10 +154,9 @@ function getIdByDistance(ids) {
 			}
 
 		// pre <= now ? true:false
-		if(compare(pre, now, hero)) {
-			min = ids[i-1]
-		} else {
+		if(!compare(pre, now, hero)) {
 			min = ids[i]
+			pre = now
 		}
 	}
 	console.warn('robot', min, 'hero', hero);
