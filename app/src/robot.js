@@ -67,7 +67,9 @@ robot.moveTo = function() {
 				tool.createMsg('System','hero kill a robot,win 100 score', 'text-info')
 			} else {
 				alert('failed!')
-				tool.creatMsge('System','hero is killed! score:' + attr.score, 'text-danger')
+				$(window).off('keypress')
+				tool.creatMsg('System','hero is killed! score:' + attr.score, 'text-danger')
+				
 			}
 			config.moveAble = true
 			robot.render()
@@ -142,35 +144,32 @@ function getIdByDistance(ids) {
 
 	var min = ids[0];
 
+	pre = {
+				x : ids[0].split('_')[1],
+				y : ids[0].split('_')[2]
+			}
 	for (var i = 1; i < ids.length; i++) {
-		var pre = {
-				x : ids[i-1].split('_')[1],
-				y : ids[i-1].split('_')[2]
-			},
-			now = {
+		var now = {
 				x : ids[i].split('_')[1],
 				y : ids[i].split('_')[2]
 			}
 
 		// pre <= now ? true:false
-		if(compare(pre, now, hero)) {
-			min = ids[i-1]
-		} else {
+		if(!compare(pre, now, hero)) {
 			min = ids[i]
+			pre = now
 		}
 	}
-	console.warn('robot', min, 'hero', hero);
 	return min
 
 }
 
 function compare(p, n, hero) {
-	console.info(hero);
 	var pd = Math.pow(Math.abs(p.x-hero.x),2) + Math.pow(Math.abs(p.y-hero.y), 2)
 	var nd = Math.pow(Math.abs(n.x-hero.x),2) + Math.pow(Math.abs(n.y-hero.y), 2)
 
 	console.log('robot,hero', pd, p, nd, n);
-	return pd <= nd ? true:false;
+	return pd <= nd;
 }
 
 module.exports = robot

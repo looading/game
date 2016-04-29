@@ -74,6 +74,7 @@ hero.moveTo = function(action) {
 				hero.data.pos = pos.join('_')
 				attr.change('score', 100)	
 			} else {
+				$(window).off('keypress')
 				alert('failed!')
 			}
 		} else if($("#" + newPos).hasClass('powerUp')) {
