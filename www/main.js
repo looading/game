@@ -44,7 +44,7 @@ map.render = function() {
 // 属性
 var attr = {
 	score : 0,
-	level : 1,
+	level : 0,
 	round : 1
 }
 attr.render = function() {
