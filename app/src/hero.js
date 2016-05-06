@@ -1,6 +1,6 @@
-var robot = require('./robot')
-var attr = require('./attr')
-var power = require('./v')
+const robot = require('./robot')
+const attr = require('./attr')
+const power = require('./v')
 
 // hero`s data
 let data = {

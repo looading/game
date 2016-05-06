@@ -1,25 +1,25 @@
 // map modal
-var map = require('./map')
+const map = require('./map')
 
 // hero modal
-var hero = require('./hero')
+const hero = require('./hero')
 
 // event modal
-var event = require('./event')
+const event = require('./event')
 
 // obstacle modal
-var obstacle = require('./obstacle')
+const obstacle = require('./obstacle')
 
 // robot modal
-var robot = require('./robot')
+const robot = require('./robot')
 
 // power-up modal
-var power = require('./v')
+const power = require('./v')
 
-var attr = require('./attr')
+const attr = require('./attr')
 
 
-var setup = require('./setup')
+const setup = require('./setup')
 
 map.render()
 

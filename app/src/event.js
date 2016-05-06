@@ -1,13 +1,13 @@
-var hero = require('./hero')
-var setup = require('./setup')
-var robot = require('./robot')
-var power = require('./v')
-var obstacle = require('./obstacle')
-var attr = require('./attr')
-var tool = require('./tool')
-var config = require('./config')
+const hero = require('./hero')
+const setup = require('./setup')
+const robot = require('./robot')
+const power = require('./v')
+const obstacle = require('./obstacle')
+const attr = require('./attr')
+const tool = require('./tool')
+const config = require('./config')
 
-var event = {}
+const event = {}
 
 // w,a,s,d or W,A,S,D
 event.create = function() {

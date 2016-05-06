@@ -1,4 +1,4 @@
-var attr = {
+const attr = {
 	score : 0,
 	level : 1,
 	round : 1

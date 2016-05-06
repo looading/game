@@ -1,13 +1,13 @@
-var hero = require('./hero')
-var obstacle = require('./obstacle')
-var power = require('./v')
-var robot = require('./robot')
+const hero = require('./hero')
+const obstacle = require('./obstacle')
+const power = require('./v')
+const robot = require('./robot')
 
 var setup = {}
 
 // 事件绑定
 setup.bind = function() {
-	$('#stage').on('click',".cell",function(e) {
+	$('#stage').on('click',".cell",(e) => {
 		var role = prompt("setup")
 		var target = $(e.target)
 		initCell(target, role)

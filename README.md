@@ -7,6 +7,8 @@ npm install
 2. 然后，启动服务器
 ```bash
 node app.js
+
+// 开发的话  执行 gulp
 ```
 在浏览器中打开 http://localhost:3000
 

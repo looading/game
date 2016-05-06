@@ -6,17 +6,16 @@ var browserify = require('browserify')
 var sass = require('gulp-sass')
 var browserSync = require('browser-sync').create()
 var reload = browserSync.reload
-var browserify = require('browserify')
 
 
-gulp.task('proxy', function() {
+gulp.task('proxy', () => {
 	browserSync.init({
 		proxy : 'localhost:3000',
 		port : 8888
 	})
 })
 
-gulp.task('script', function() {
+gulp.task('script', () => {
 	return browserify({
 			debug : true
 		})
@@ -27,7 +26,7 @@ gulp.task('script', function() {
 		.pipe(gulp.dest('app/'))
 })
 
-gulp.task('babel', function() {
+gulp.task('babel', () => {
 	return gulp.src("app/src/**/*.js")
 	    .pipe(sourcemaps.init())
 	    .pipe(babel({
@@ -38,13 +37,13 @@ gulp.task('babel', function() {
 	    .pipe(gulp.dest("app"))
 })
 
-gulp.task('sass', function() {
+gulp.task('sass', () => {
 	return gulp.src("app/src/**/*.scss")
 		.pipe(sass())
 		.pipe(gulp.dest("app"))
 })
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
 	gulp.watch('app/src/**/*.js', ['script']).on('change', reload)
 	gulp.watch('app/**/*.scss', ['sass']).on('change', reload)
 	gulp.watch('app/*.html').on('change', reload)

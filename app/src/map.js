@@ -1,4 +1,4 @@
-var config = require('./config')
+const config = require('./config')
 
 var map = new Object()
 var data = new Array()
