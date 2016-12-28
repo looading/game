@@ -11,7 +11,7 @@ var browserify = require('browserify')
 
 gulp.task('proxy', function() {
 	browserSync.init({
-		proxy : 'localhost:3000',
+		proxy : 'localhost:3000',	
 		port : 8888
 	})
 })
@@ -21,6 +21,10 @@ gulp.task('script', function() {
 			debug : true
 		})
 		.add("./app/src/main.js")
+		.transform('babelify', {
+			presets: ["es2015", "stage-0"],
+		    plugins: ["transform-remove-strict-mode", "transform-object-assign"]
+		})
 		.bundle()
 		.pipe(source('bundle.js'))
 		.pipe(buffer())

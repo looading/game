@@ -14,7 +14,6 @@ robot.set = function(id) {
 	if(robot.data[id]) {
 		return false
 	}
-
 	robot.data[id] = id
 	robot.render()
 	return true
@@ -26,8 +25,7 @@ robot.render = function() {
 	for(var item in robot.data) {
 		$("#" + item).addClass('robot').html('R')
 	}
-	console.info(robot.data);
-	
+	console.info(robot.data);	
 }
 
 // 移动
@@ -110,13 +108,11 @@ robot.moveTo = function() {
 	}
 	
 }
-
 // 删除robot
 robot.delete = function(id) {
 	delete robot.data[id]
 	robot.render()
 }
-
 
 function getIdList(x, y) {
 	var tox = toy = 0
